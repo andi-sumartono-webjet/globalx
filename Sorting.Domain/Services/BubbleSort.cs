@@ -5,7 +5,14 @@ namespace Sorting.Domain.Services
 {
     public class BubbleSort<T> : ISort<T> where T : IComparable<T>, new()
     {
-        public IEnumerable<T> Sort(IEnumerable<T> source)
+        private readonly ILogger<Services.BubbleSort> logger;
+
+        public ClassName(ILogger<BubbleSort> logger)
+        {
+            this.logger = logger;
+        }
+
+        public IList<T> Sort(IList<T> source)
         {
             return new List<T>();
         }

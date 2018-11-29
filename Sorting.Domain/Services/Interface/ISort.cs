@@ -4,6 +4,6 @@ namespace Sorting.Domain.Services.Interface
 {
     public interface ISort<T> where T: IComparable<T>, new() 
     {
-        IEnumerable<T> Sort(IEnumerable<T> source);
+        IList<T> Sort(IList<T> source);
     }
 }
