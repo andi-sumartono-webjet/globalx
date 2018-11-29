@@ -25,7 +25,7 @@ namespace Sorting.Domain.Tests.Models
             var result = fullName.CompareTo(fullNameToTest);
             
             //assert
-            Assert.AreEqual(expectedResult, result, $"{value} {stringToTest}");
+            Assert.AreEqual(expectedResult, result, $"Failed when comparing '{value}' and '{stringToTest}'");
         }
 
         [DataTestMethod]
@@ -46,7 +46,7 @@ namespace Sorting.Domain.Tests.Models
             var result = fullName.CompareTo(fullNameToTest);
             
             //assert
-            Assert.AreEqual(expectedResult, result, $"{value} {stringToTest}");
+            Assert.AreEqual(expectedResult, result, $"Failed when comparing '{value}' and '{stringToTest}'");
         }
 
         [DataTestMethod]
@@ -67,10 +67,77 @@ namespace Sorting.Domain.Tests.Models
             var result = fullName.CompareTo(fullNameToTest);
             
             //assert
-            Assert.AreEqual(expectedResult, result, $"{value} {stringToTest}");
+            Assert.AreEqual(expectedResult, result, $"Failed when comparing '{value}' and '{stringToTest}'");
         }
 
+        [DataTestMethod]
+        [DataRow("Apple           Orange","  Apple      Orange", 0)]
+        [DataRow("Apple     Orange","    Orange                Apple    ", 1)]
+        [DataRow("Orange                            Apple","     Apple Orange", -1)]
+        public void CompareTo_Given_AFullNameWithThatContainATwoWordsWithMultipleSpaces_ComparedWithFullNameWithTwoWordsWithMultipleSpaces_ShouldReturn_TheRightValue(
+            string value, 
+            string stringToTest, 
+            int expectedResult
+        )
+        {
+            //arrange
+            var fullNameToTest = new FullName(stringToTest);
+            var fullName = new FullName(value);
 
+            //act
+            var result = fullName.CompareTo(fullNameToTest);
+            
+            //assert
+            Assert.AreEqual(expectedResult, result, $"Failed when comparing '{value}' and '{stringToTest}'");
+        }
+
+        [DataTestMethod]
+        [DataRow("Apple Orange Pinnaple","Apple Orange Pinnaple", 0)]
+        [DataRow("Apple Pinnaple Orange","Apple Pinnaple Apple", 1)]
+        [DataRow("Apple Pinnaple Apple","Apple Pinnaple Orange", -1)]
+        [DataRow("Apple Orange Pinnaple","Apple Apple Pinnaple", 1)]
+        [DataRow("Apple Apple Pinnaple","Apple Orange Pinnaple", -1)]
+        [DataRow("Orange Pinnaple Orange","Apple Pinnaple Orange", 1)]
+        [DataRow("Apple Pinnaple Orange","Orange Pinnaple Orange", -1)]
+        public void CompareTo_Given_AFullNameWithThatContainAThreeWords_ComparedWithFullNameWithThreeWords_ShouldReturn_TheRightValue(
+            string value, 
+            string stringToTest, 
+            int expectedResult
+        )
+        {
+            //arrange
+            var fullNameToTest = new FullName(stringToTest);
+            var fullName = new FullName(value);
+
+            //act
+            var result = fullName.CompareTo(fullNameToTest);
+            
+            //assert
+            Assert.AreEqual(expectedResult, result, $"Failed when comparing '{value}' and '{stringToTest}'");
+        }
+
+        [DataTestMethod]
+        [DataRow("Janet Parsons","Marin Alvarez", 1)]
+        [DataRow("Vaughn Lewis","Adonis Julius Archer", 1)]
+        [DataRow("Adonis Julius Archer","Beau Tristan Bentley", -1)]
+        [DataRow("Shelby Nathan Yoder","Hunter Uriah Mathew Clarke", 1)]
+        [DataRow("Marin Alvarez","Hunter Uriah Mathew Clarke", -1)]
+        public void CompareTo_Given_AFullNameWithThatContainRandomNames_ComparedWithFullNameWithRandomNames_ShouldReturn_TheRightValue(
+            string value, 
+            string stringToTest, 
+            int expectedResult
+        )
+        {
+            //arrange
+            var fullNameToTest = new FullName(stringToTest);
+            var fullName = new FullName(value);
+
+            //act
+            var result = fullName.CompareTo(fullNameToTest);
+            
+            //assert
+            Assert.AreEqual(expectedResult, result, $"Failed when comparing '{value}' and '{stringToTest}'");
+        }
 
     }
 }
