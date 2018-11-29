@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Sorting.Tests
+namespace Sorting.Domain.Tests
 {
     [TestClass]
     public class UnitTest1
