@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using Sorting.Domain.Models;
 using System.Linq;
+using System;
 
 [TestClass]
 public class BubbleSortTests 
@@ -31,20 +32,55 @@ public class BubbleSortTests
     }
 
     [TestMethod]
-    public void Sort_GivenASimpleFullNameArray_ShouldReturn_SortedArray()
+    [DynamicData(nameof(GetData), DynamicDataSourceType.Method)]
+    public void Sort_GivenASimpleFullNameArray_ShouldReturn_SortedArray(string[] input, string[] expectedOutput)
     {
         //arrange
-        var inputArray = new List<string> {"A", "B", "C"}
+        var inputArray = input
                             .Select(x=>new FullName(x))
                             .ToList();
-
-        var expectedArray = new string[]{"A", "B", "C"};
 
         //act
         var result = _bubbleSort.Sort(inputArray);
 
-        //assert 
-        Assert.IsTrue(expectedArray.SequenceEqual(result.Select(x=>x.ToString()).ToArray()));
+        //assert
+        var arrayResult = result.Select(x=>x.ToString()).ToArray(); 
+        
+        Assert.IsTrue(expectedOutput.SequenceEqual(arrayResult));
     }
 
+    private static IEnumerable<object[]> GetData()
+    {        
+        yield return new object[] { 
+            new []
+            {
+                "Janet Parsons",
+                "Vaughn Lewis",
+                "Adonis Julius Archer",
+                "Shelby Nathan Yoder",
+                "Marin Alvarez",
+                "London Lindsey",
+                "Beau Tristan Bentley",
+                "Leo Gardner",
+                "Hunter Uriah Mathew Clarke",
+                "Mikayla Lopez",
+                "Frankie Conner Ritter"
+            }, 
+            new[]
+            {
+                "Marin Alvarez",
+                "Adonis Julius Archer",
+                "Beau Tristan Bentley",
+                "Hunter Uriah Mathew Clarke",
+                "Leo Gardner",
+                "Vaughn Lewis",
+                "London Lindsey",
+                "Mikayla Lopez",
+                "Janet Parsons",
+                "Frankie Conner Ritter",
+                "Shelby Nathan Yoder"   
+            } 
+        };
+
+    }
 }

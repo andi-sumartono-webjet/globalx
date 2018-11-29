@@ -13,7 +13,18 @@ namespace Sorting.Domain.Services
 
         public IList<T> Sort(IList<T> source)
         {
-            return new List<T>();
+            for(int i=0; i<source.Count-1; i++) 
+            {
+                for(int j=i+1; j<source.Count; j++) 
+                {
+                    if (source[i].CompareTo(source[j]) == 1) 
+                    {
+                        //swap i and j content;
+                        (source[j], source[i]) = (source[i], source[j]);
+                    }
+                }
+            }
+            return source;
         }
     }
 }
