@@ -2,6 +2,7 @@ using Sorting.Domain.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using Sorting.Domain.Models;
+using System.Linq;
 
 [TestClass]
 public class BubbleSortTests 
@@ -16,7 +17,7 @@ public class BubbleSortTests
     }
 
     [TestMethod]
-    public void Sort_GivenAnEmptyArray_ShouldReturn_EmptyArray() 
+    public void Sort_GivenAnEmptyFullNameArray_ShouldReturn_EmptyArray() 
     {
         //arrange
         
@@ -28,4 +29,22 @@ public class BubbleSortTests
         Assert.AreEqual(result.Count, 0);
         
     }
+
+    [TestMethod]
+    public void Sort_GivenASimpleFullNameArray_ShouldReturn_SortedArray()
+    {
+        //arrange
+        var inputArray = new List<string> {"A", "B", "C"}
+                            .Select(x=>new FullName(x))
+                            .ToList();
+
+        var expectedArray = new string[]{"A", "B", "C"};
+
+        //act
+        var result = _bubbleSort.Sort(inputArray);
+
+        //assert 
+        Assert.IsTrue(expectedArray.SequenceEqual(result.Select(x=>x.ToString()).ToArray()));
+    }
+
 }

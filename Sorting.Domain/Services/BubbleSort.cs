@@ -1,15 +1,14 @@
 using System.Collections.Generic;
+using Sorting.Domain.Models.Interface;
 using Sorting.Domain.Services.Interface;
 
 namespace Sorting.Domain.Services 
 {
-    public class BubbleSort<T> : ISort<T> where T : IComparable<T>, new()
+    public class BubbleSort<T> : ISort<T> where T: IComparable<T>
     {
-        private readonly ILogger<Services.BubbleSort> logger;
 
-        public ClassName(ILogger<BubbleSort> logger)
+        public BubbleSort()
         {
-            this.logger = logger;
         }
 
         public IList<T> Sort(IList<T> source)
