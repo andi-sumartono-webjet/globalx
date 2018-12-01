@@ -8,6 +8,8 @@ using Sorting.Domain.Services.Interface;
 using Sorting.Domain.Services;
 using Sorting.Domain.Repositories.Interface;
 using Sorting.Infrastructure.Repositories;
+using Sorting.Infrastructure.Services;
+using Sorting.Infrastructure.Services.Interface;
 
 namespace Sorting.Console
 {
@@ -21,28 +23,31 @@ namespace Sorting.Console
 
             var serviceProvider = serviceCollection
                 .AddOptions()
-                .AddLogging()
+                .AddLogging()   
+                .Configure<Configuration>(configuration)
                 .AddSingleton<ISortingFactory<FullName>, SortingFactory<FullName>>()
+                .AddSingleton<IFileService, FileService>()
                 .AddTransient<IFullNameRepository, FullNameRepository>()
+                .AddTransient<IFileService, FileService>()
                 .AddTransient<App>();            
         }
 
-        static void Usage(string exeName) 
+        static void PrintUsageInstruction() 
         {
-            System.Console.WriteLine($"Usage: {exeName} file-to-process.txt [--method=Bubble|--method=Quick]");
-            System.Console.WriteLine($"by default bubble sort method will be used. Method values are case sensitive :)");
+            var currentExecutableName = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
+            System.Console.WriteLine($"Usage: {currentExecutableName} file-to-process.txt [--method=Bubble|--method=Quick]");
+            System.Console.WriteLine($"by default bubble sort method will be used :)");
         }
 
 
         static void Main(string[] args)
         {
-            var currentExecutableName = args[0];
-            if (args.Length < 2) 
+            if (args.Length == 0) 
             {
-                Usage(currentExecutableName);
+                PrintUsageInstruction();
             }
         
-            var filePath = args[1];
+            var filePath = args[0];
 
             var options = args.Skip(1).ToArray(); //we're skipping the first arg because it contains filename
             ServiceCollection serviceCollection = new ServiceCollection();
