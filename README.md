@@ -14,8 +14,7 @@ To run all unit tests
 To run the project run
 > ```dotnet run ./Sorting.Console/Sorting.Console.csproj ./unsorted-names-list.txt```
 
-This command will generate an output file at
-**./Sorting.Console/sorted-names-list.txt**
+This command will generate an output file ``sorted-names-list.txt`` at the current folder. 
 
 Optional parameters:
 * ```--method=[quick|bubble]```  
