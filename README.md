@@ -18,8 +18,8 @@ This command will generate an output file at
 **./Sorting.Console/sorted-names-list.txt**
 
 Optional parameters:
-* ```--method=quick```
-* ```--out=[output parameter]```
+* ```--method=[quick|bubble]```  
+* ```--output=[outputfilepath]```
 
 Providing that you have a file named ```/tmp/unsorted-names-list.txt```, To run through docker
 ```
