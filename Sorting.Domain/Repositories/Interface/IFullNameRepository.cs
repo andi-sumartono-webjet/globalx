@@ -4,6 +4,7 @@ namespace Sorting.Domain.Repositories.Interface
 {
     public interface IFullNameRepository : IRepository<FullName>
     {
-        IFullNameRepository SetFilePath(string filePath);        
+        IFullNameRepository SetInputFilePath(string filePath); 
+        IFullNameRepository SetOutputFilePath(string filePath);       
     }
 }

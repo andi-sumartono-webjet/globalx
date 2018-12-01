@@ -40,7 +40,7 @@ namespace Sorting.Infrastructure.Tests.Repository
         {
             //arrange
             var filePath = "path";
-            _fullnameRepository.SetFilePath(filePath);
+            _fullnameRepository.SetInputFilePath(filePath);
             _fileService.Setup( x => x.IsFileExists(filePath) ).Returns(false);
 
             //act
@@ -61,7 +61,7 @@ namespace Sorting.Infrastructure.Tests.Repository
                 "Content2"
             };
 
-            _fullnameRepository.SetFilePath(filePath);
+            _fullnameRepository.SetInputFilePath(filePath);
             _fileService.Setup( x => x.IsFileExists(filePath) ).Returns(true);
             _fileService.Setup( x => x.ReadAllLines(filePath) ).Returns(fileContent);
 
