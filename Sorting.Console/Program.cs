@@ -56,7 +56,16 @@ namespace Sorting.Console
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
             var app = serviceProvider.GetService<App>();
-            app.Run(filePath); 
+            
+            try 
+            {
+                app.Run(filePath); 
+            } 
+            catch(Exception ex) 
+            {
+                System.Console.WriteLine($"Error when processing {filePath}");
+                System.Console.WriteLine($"Message: {ex.Message}");
+            }
         }
     }
 }
