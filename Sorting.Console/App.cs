@@ -34,7 +34,7 @@ namespace Sorting.Console
             this.repository = repository;
         }
         
-        public void Run(string filePath)
+        public FullName[] Run(string filePath)
         {
             SortingMethodEnum sortingMethod;
 
@@ -49,25 +49,26 @@ namespace Sorting.Console
             
             try 
             {
-                var allNames = this.repository
-                                .SetInputFilePath(filePath)
-                                .GetAll();
-                
-                var result = this
-                            .sortingFactory
-                            .GetSortingMethod(sortingMethod)
-                            .Sort(allNames)
-                            .ToArray();
-
                 var outputFilePath = Path.Combine(
                                         fileService.GetCurrentWorkingDirectory(), 
                                         config.Value.output ?? "sorted-names-list.txt"
                                     );
 
+                var allNames = this.repository
+                                .SetInputFilePath(filePath)
+                                .GetAll();
+                
+                var results = this
+                            .sortingFactory
+                            .GetSortingMethod(sortingMethod)
+                            .Sort(allNames)
+                            .ToArray();                
+
                 this.repository
                         .SetOutputFilePath(outputFilePath)
-                        .Save(result);            
+                        .Save(results); 
 
+                return results;
             } 
             catch (Exception ex) 
             {

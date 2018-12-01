@@ -59,7 +59,12 @@ namespace Sorting.Console
             
             try 
             {
-                app.Run(filePath); 
+                var fullnames = app.Run(filePath);
+                
+                foreach (var name in fullnames)
+                {
+                    System.Console.WriteLine(name.ToString());
+                }
             } 
             catch(Exception ex) 
             {
