@@ -13,7 +13,7 @@ build_script:
   - cmd: dotnet publish ./Sorting.Console/Sorting.Console.csproj
 after_build:
 artifacts:
- - path: '\src\bin\Debug\netcoreapp2.1\publish'
+ - path: './Sorting.Console/bin/Debug/netcoreapp2.1/publish'
    name: Sorting
    type: Zip
 clone_depth: 1
