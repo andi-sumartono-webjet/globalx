@@ -8,46 +8,39 @@ namespace Sorting.Domain.Services
     public class QuickSort<T> : ISort<T> where T : IComparable<T>
     {
 
-        private int GetPartition(T[] arr, int left, int right) 
-        {
-            T pivot = arr[left];
-            while (true) 
-            {
-                while (arr[left].CompareTo(pivot) == -1)  
-                    left++;
-
-                while (arr[right].CompareTo(pivot) == 1)
-                    right--;
-
-                if (left < right)
-                {
-                    if (arr[left].CompareTo(arr[right]) == 0) return right;
-                    (arr[left], arr[right]) = (arr[right], arr[left]);
-                }
-                else 
-                {
-                    return right;
-                }
-            }
-        } 
-
         private void StartSort(T[] arr, int left, int right) 
         {
-            if (left > right) return;
-            int pivot = GetPartition(arr, left, right);
+            int i=left, j=right; 
+            T pivot = arr[(left+right)/2];
 
-            if (pivot > 1) {
-                GetPartition(arr, left, pivot - 1);
+            while (i <= j) 
+            {
+                while (arr[i].CompareTo(pivot) < 0) 
+                    i++;
+
+                while (arr[j].CompareTo(pivot) > 0)
+                    j--;
+
+                if (i <= j)
+                {
+                    (arr[i], arr[j]) = (arr[j], arr[i]);
+                    i++;
+                    j--;
+                }
             }
-            if (pivot + 1 < right) {
-                GetPartition(arr, pivot + 1, right);
-            }
-        }
+
+            if (left < j)
+                StartSort(arr, left, j);
+            
+            if (i < right)
+                StartSort(arr, i, right);
+        } 
+
 
         public IList<T> Sort(IList<T> source)
         {
             var arrSource = source.ToArray();
-            StartSort(arrSource, 0, source.Count);
+            StartSort(arrSource, 0, source.Count-1);
             return arrSource.ToList();
         }
     }

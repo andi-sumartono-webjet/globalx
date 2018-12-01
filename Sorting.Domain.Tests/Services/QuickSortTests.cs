@@ -8,12 +8,12 @@ using System;
 [TestClass]
 public class QuickSortTests 
 {
-    private BubbleSort<FullName> _quickSort;
+    private QuickSort<FullName> _quickSort;
 
     [TestInitialize]
     public void Initializer()
     {
-        _quickSort = new BubbleSort<FullName>();
+        _quickSort = new QuickSort<FullName>();
 
     }
 

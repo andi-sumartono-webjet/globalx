@@ -45,6 +45,7 @@ namespace Sorting.Console
             if (args.Length == 0) 
             {
                 PrintUsageInstruction();
+                Environment.Exit(0);
             }
         
             var filePath = args[0];
