@@ -18,7 +18,11 @@ artifacts:
    type: Zip
 clone_depth: 1
 test_script:
-  - cmd: dotnet restore --verbosity m
-  - cmd: dotnet test
+  - cmd: dotnet restore ./Sorting.Console.Tests/Sorting.Console.Tests.csproj --verbosity m
+  - cmd: dotnet test ./Sorting.Console.Tests/
+  - cmd: dotnet restore ./Sorting.Domain.Tests/Sorting.Domain.Tests.csproj --verbosity m
+  - cmd: dotnet test ./Sorting.Domain.Tests/
+  - cmd: dotnet restore ./Sorting.Infrastructure.Tests/Sorting.Infrastructure.Tests.csproj --verbosity m
+  - cmd: dotnet test ./Sorting.Infrastructure.Tests/
 on_finish :
 deploy: off
