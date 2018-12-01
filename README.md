@@ -6,7 +6,7 @@ This project is structured in accordance to DDD's Onion Layering Structure
 https://www.infoq.com/news/2014/10/ddd-onion-architecture
 
 Prerequisites:
-> .NET Core 2.1
+> .NET Core 2.1 or ```Docker```
 
 To run all unit tests
 > ```dotnet test```
